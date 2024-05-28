@@ -1,0 +1,28 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  database: music_app
+  username: postgres
+  password: postgres
+  host: localhost
+  port: 5432
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  adapter: postgresql
+  database: music_app
+  username: postgres
+  password: postgres
+  host: localhost
+  port: 5432
+
+test:
+  <<: *default
+  database: music_app
+
+production:
+  <<: *default
+  database: music_app_production
+  username: music_app
+  password: <%= ENV["FURNITURE_ONLINE_STORE_DATABASE_PASSWORD"] %>
