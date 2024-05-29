@@ -1,0 +1,2 @@
+module MusAlbumsHelper
+end

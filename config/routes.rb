@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+  resources :mus_albums
 
-  root to: "albums#index"
+  root to: "songs#index"
   devise_for :users
    
-  resources :albums
+  resources :songs
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -18,21 +19,28 @@ Rails.application.routes.draw do
   # config/routes.rb
 
   # config/routes.rb
-resources :albums do
+resources :songs do
   collection do
     get :search
   end
 end
 
+  resources :albums do
+    collection do
+      get :search
+    end
+  end
 
+  resources :songs do
+    member do
+      patch :publish
+    end
+  end
 
   resources :albums do
     member do
       patch :publish
     end
   end
-  
-    
-
 
 end

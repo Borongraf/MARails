@@ -1,15 +1,15 @@
-class Album < ApplicationRecord
+class Song < ApplicationRecord
   before_validation :set_default_title
   
   def set_default_title
-    self.title ||= "Untitled Album"
+    self.title ||= "Untitled song"
   end
-
 
     has_rich_text :content
     has_one_attached :profile_image
-    belongs_to:user
-    has_one_attached:audio
+    belongs_to :user
+    belongs_to :album
+    has_one_attached :audio
     has_many :taggings 
     has_many :tags, through: :taggings
     attribute :published, :boolean, default: false
@@ -31,6 +31,6 @@ class Album < ApplicationRecord
       end
     
       def self.ransackable_attributes(auth_object = nil)
-        ["created_at", "description", "id", "price", "title", "updated_at"]
+        ["created_at", "description", "id", "album_id", "title", "updated_at"]
       end
 end

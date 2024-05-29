@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_101933) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_154258) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_101933) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "mus_albums", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "published"
+  end
+
   create_table "songs", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -65,10 +73,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_101933) do
 
   create_table "taggings", force: :cascade do |t|
     t.bigint "tag_id", null: false
-    t.bigint "album_id", null: false
+    t.bigint "song_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["album_id"], name: "index_taggings_on_album_id"
+    t.bigint "album_id"
+    t.index ["song_id"], name: "index_taggings_on_song_id"
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
   end
 
@@ -93,6 +102,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_101933) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "songs", "users"
-  add_foreign_key "taggings", "songs", column: "album_id"
+  add_foreign_key "taggings", "songs"
   add_foreign_key "taggings", "tags"
 end
