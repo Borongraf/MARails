@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_11_113226) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_101933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,15 +52,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_113226) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "albums", force: :cascade do |t|
+  create_table "songs", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.boolean "published"
-    t.index ["user_id"], name: "index_albums_on_user_id"
+    t.integer "album_id"
+    t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -92,7 +92,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_11_113226) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "albums", "users"
-  add_foreign_key "taggings", "albums"
+  add_foreign_key "songs", "users"
+  add_foreign_key "taggings", "songs", column: "album_id"
   add_foreign_key "taggings", "tags"
 end
