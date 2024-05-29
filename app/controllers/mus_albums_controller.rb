@@ -79,15 +79,15 @@ class MusAlbumsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_mus_album
-      @mus_album = MusAlbum.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_mus_album
+    @mus_album = MusAlbum.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def mus_album_params
-      params.require(:mus_album).permit(:title, :description)
-    end
+  # Only allow a list of trusted parameters through.
+  def mus_album_params
+    params.require(:mus_album).permit(:title, :description)
+  end
 
   def set_search
     @q = MusAlbum.ransack(params[:q])

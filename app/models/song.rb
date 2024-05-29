@@ -8,14 +8,13 @@ class Song < ApplicationRecord
     has_rich_text :content
     has_one_attached :profile_image
     belongs_to :user
-    belongs_to :album
+    belongs_to :mus_album
     has_one_attached :audio
     has_many :taggings 
     has_many :tags, through: :taggings
     attribute :published, :boolean, default: false
     scope :published, -> { where(published: true) }
 
-  
        def all_tags=(names)
         self.tags = names.split(",").map do |name|
           Tag.where(name: name.strip).first_or_create!

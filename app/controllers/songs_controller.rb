@@ -27,10 +27,11 @@ class SongsController < ApplicationController
 
   # POST /songs or /songs.json
   def create
+    @song = Song.new()
     @song = current_user.songs.build(song_params)
-
     @song.published = params[:song][:published] == '1'
-
+    @song.all_tags = params[:song][:all_tags]
+    @song.mus_album = MusAlbum.find(params[:song][:mus_album_id])
 
     respond_to do |format|
       if @song.save
