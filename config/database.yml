@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  database: music_app
+  database: musicapp
   username: postgres
   password: postgres
   host: localhost
@@ -11,7 +11,7 @@ default: &default
 development:
   <<: *default
   adapter: postgresql
-  database: music_app
+  database: musicapp
   username: postgres
   password: postgres
   host: localhost
@@ -19,10 +19,10 @@ development:
 
 test:
   <<: *default
-  database: music_app
+  database: musicapp
 
 production:
   <<: *default
-  database: music_app_production
-  username: music_app
+  database: musicapp_production
+  username: musicapp
   password: <%= ENV["FURNITURE_ONLINE_STORE_DATABASE_PASSWORD"] %>
