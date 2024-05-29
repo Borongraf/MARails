@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  resources :mus_albums
 
-  root to: "songs#index"
+  root to: "mus_albums#index"
   devise_for :users
-   
+
+  resources :mus_albums
   resources :songs
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -14,7 +14,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  
 
   # config/routes.rb
 
@@ -42,5 +41,4 @@ end
       patch :publish
     end
   end
-
 end

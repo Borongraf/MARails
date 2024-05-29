@@ -7,7 +7,6 @@ class MusAlbumsController < ApplicationController
     @mus_album = @q.result(distinct: true).includes(:tags).where(published: true)
   end
 
-
   # GET /mus_albums/1 or /mus_albums/1.json
   def show
   end
@@ -29,7 +28,7 @@ class MusAlbumsController < ApplicationController
 
     respond_to do |format|
       if @mus_album.save
-        format.html { redirect_to mus_album_url(@mus_album), notice: "Mus album was successfully created." }
+        format.html { redirect_to mus_album_url(@mus_album), notice: "Album was successfully created." }
         format.json { render :show, status: :created, location: @mus_album }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -54,7 +53,7 @@ class MusAlbumsController < ApplicationController
   def update
     respond_to do |format|
       if @mus_album.update(mus_album_params)
-        format.html { redirect_to mus_album_url(@mus_album), notice: "Mus album was successfully updated." }
+        format.html { redirect_to mus_album_url(@mus_album), notice: "Album was successfully updated." }
         format.json { render :show, status: :ok, location: @mus_album }
       else
         format.html { render :edit, status: :unprocessable_entity }

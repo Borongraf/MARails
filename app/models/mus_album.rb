@@ -1,4 +1,10 @@
 class MusAlbum < ApplicationRecord
+
+  before_validation :set_default_title
+  def set_default_title
+    self.title ||= "Untitled album"
+  end
+
   has_many :songs
   has_many :taggings
   belongs_to :user
@@ -7,10 +13,6 @@ class MusAlbum < ApplicationRecord
   has_many :tags, through: :taggings
   attribute :published, :boolean, default: false
   scope :published, -> { where(published: true) }
-
-  def set_default_title
-    self.title ||= "Untitled album"
-  end
 
   def all_tags=(names)
     self.tags = names.split(",").map do |name|

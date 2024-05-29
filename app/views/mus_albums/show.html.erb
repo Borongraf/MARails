@@ -4,25 +4,12 @@
 >
   <p style="color: red"><%= notice %></p>
   <div class="d-flex"><%= render @mus_album %></div>
-  <div>
-    <br />
-    <div style="margin-left: 100px; ">
-      <% if @mus_album.profile_image.present? %> <%= image_tag @mus_album.profile_image, width: 250, height: 300, resize_to_fill: [100, 100] %>
-      <% else %>
-        <%= image_tag '', width: 250, height: 300, resize_to_fill: [100, 100] %>
-      <% end %>
 
-      <br />
-      <br />
-
-      <br/>
-
-    </div>
     <br />
     <div class="mt-3 " style="margin-left:170px">
       <h2>Your albums</h2>
       <% current_user.mus_albums.each do |mus_album| %>
-        <p><%= link_to mus_album.title, song_path(mus_album) %></p>
+        <p><%= link_to mus_album.title, mus_album_path(mus_album) %></p>
       <% end %>
 
     </div>
@@ -30,7 +17,7 @@
 </div>
 
 <div style="margin-left: 250px">
-  <%= link_to "Edit this album", edit_song_path(@mus_album) %>
+  <%= link_to "Edit this album", edit_mus_album_path(@mus_album) %>
   <br />
   <br />
   <%= button_to "Destroy this album", @mus_album, method: :delete,class: "btn btn-danger" %>

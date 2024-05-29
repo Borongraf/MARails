@@ -1,7 +1,8 @@
-<%= form_with(model: mus_album) do |form| %>
-  <% if mus_album.errors.any? %>
+<%= form_with(model: mus_album , local: true) do |form| %> <% if mus_album.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(mus_album.errors.count, "error") %> prohibited this album from being saved:</h2>
+      <h2>
+        <%= pluralize(mus_album.errors.count, "error") %> prohibited this album from being saved:
+      </h2>
 
       <ul>
         <% mus_album.errors.each do |error| %>
@@ -21,7 +22,13 @@
     <%= form.text_field :description %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="field m-2">
+    <%= form.label :tags ,style:"display: block;" %> <%= form.text_field :all_tags %>
   </div>
+
+  <div class="field m-2">
+    <%= form.label :published %> <%= form.check_box :published %>
+  </div>
+
+  <div><%= form.submit "Submit", class: "btn btn-info" %></div>
 <% end %>

@@ -23,7 +23,6 @@ class SongsController < ApplicationController
 
   # GET /songs/1/edit
   def edit
-    
   end
 
   # POST /songs or /songs.json

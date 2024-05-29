@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_154258) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_162238) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_154258) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "published"
+    t.bigint "user_id"
   end
 
   create_table "songs", force: :cascade do |t|
@@ -76,7 +77,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_154258) do
     t.bigint "song_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "album_id"
+    t.bigint "mus_album_id"
     t.index ["song_id"], name: "index_taggings_on_song_id"
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
   end
