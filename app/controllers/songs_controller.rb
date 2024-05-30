@@ -1,37 +1,32 @@
 class SongsController < ApplicationController
-  before_action :authenticate_user! , only: %i[show edit update destroy]
-  before_action :set_song, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: %i[show edit update destroy]
+  before_action :set_song, only: %i[show edit update destroy]
   before_action :set_search
 
-  # GET /albums or /albums.json
+  # GET /songs or /songs.json
   def index
     @q = Song.ransack(params[:q])
-    @songs = @q.result(distinct: true).includes(:tags).where(published:true) # Include associated tags to avoid N+1 queries
+    @songs = @q.result(distinct: true).includes(:tags).where(published: true) # Include associated tags to avoid N+1 queries
   end
-
 
   def new
     @song = current_user.songs.build
   end
 
-  # GET /albums/1 or /albums/1.json
+  # GET /songs/1 or /songs/1.json
   def show
   end
 
-  # GET /albums/new
+  # GET /songs/new
 
-
-  # GET /albums/1/edit
+  # GET /songs/1/edit
   def edit
-
   end
 
-  # POST /albums or /albums.json
+  # POST /songs or /songs.json
   def create
     @song = current_user.songs.build(song_params)
-
     @song.published = params[:song][:published] == '1'
-
 
     respond_to do |format|
       if @song.save
@@ -43,7 +38,6 @@ class SongsController < ApplicationController
       end
     end
   end
-
 
   def search
     @q = Song.ransack(params[:q])
@@ -57,12 +51,11 @@ class SongsController < ApplicationController
     redirect_to songs_path, notice: 'Song published successfully.'
   end
 
-
-  # PATCH/PUT /albums/1 or /albums/1.json
+  # PATCH/PUT /songs/1 or /songs/1.json
   def update
     respond_to do |format|
-      if @song.update(album_params)
-        format.html { redirect_to song_url(@song), notice: "Album was successfully updated." }
+      if @song.update(song_params)
+        format.html { redirect_to song_url(@song), notice: "Song was successfully updated." }
         format.json { render :show, status: :ok, location: @song }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -71,7 +64,7 @@ class SongsController < ApplicationController
     end
   end
 
-  # DELETE /albums/1 or /albums/1.json
+  # DELETE /songs/1 or /songs/1.json
   def destroy
     @song = Song.find(params[:id])
     @song.taggings.destroy_all
@@ -85,8 +78,6 @@ class SongsController < ApplicationController
     end
   end
 
-
-
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_song
@@ -95,7 +86,7 @@ class SongsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def song_params
-    params.require(:song).permit(:title, :description, :published, :all_tags , :audio , :profile_image)
+    params.require(:song).permit(:title, :description, :published, :price, :all_tags, :audio, :profile_image)
   end
 
   def set_search

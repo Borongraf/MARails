@@ -1,9 +1,7 @@
 <%= form_with(model: song, local: true) do |form| %>
   <% if song.errors.any? %>
     <div style="color: red">
-      <h2>
-        <%= pluralize(song.errors.count, "error") %> prohibited this song from being saved:
-      </h2>
+      <h2><%= pluralize(song.errors.count, "error") %> prohibited this song from being saved:</h2>
       <ul>
         <% song.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -22,11 +20,6 @@
     <%= form.text_area :description %>
   </div>
 
-  <div>
-    <%= form.label :mus_album_id, style: "display: block" %>
-    <%= form.text_field :mus_album_id %>
-  </div>
-
   <div class="form-group m-2">
     <%= form.label :profile_image %><br />
     <%= form.file_field :profile_image %>
@@ -38,8 +31,9 @@
   </div>
 
   <div class="field m-2">
-    <%= form.label :tags, style: "display: block;" %>
+    <%= form.label :tags, style: "display: block" %>
     <%= form.text_field :all_tags %>
+    <!-- Assuming a comma-separated list of tags -->
   </div>
 
   <div class="field m-2">
@@ -47,5 +41,7 @@
     <%= form.check_box :published %>
   </div>
 
-  <%= form.submit "Submit", class: "btn btn-info" %>
+  <div>
+    <%= form.submit "Submit", class: "btn btn-info" %>
+  </div>
 <% end %>

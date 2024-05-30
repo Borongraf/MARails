@@ -8,7 +8,7 @@
       id="al"
       class="mt-4 mb-4 display-5 text-center"
       style="
-        background-color: white;
+      background-color: white;
         margin-left: -20px;
         color: rgb(30, 215, 96);
       "
@@ -19,23 +19,17 @@
 
   <div id="card" class="container-fluid bg-white">
     <div class="row">
-      <% @song.each do |song| %>
-
-      <div class="col-md-3 col-sm-12 mb-4">
-        <div class="card m-2" style="height: 180px; border: none">
-          <div class="card1">
-            <%= image_tag 'carousel2.jpg', class: 'card-img-top img-fluid',
-            style: 'max-height: 350px;width:200px' %>
-            <h5
-              class="card-title text-center mt-4"
-              style="text-decoration: none; margin-left: -200px"
-            >
-              <%= link_to song.title, song %>
-              
-            </h5>
+      <% @songs.each do |song| %>
+        <div class="col-md-3 col-sm-12 mb-4">
+          <div class="card m-2" style="height: 180px; border: none">
+            <div class="card1">
+              <%= image_tag 'carousel2.jpg', class: 'card-img-top img-fluid', style: 'max-height: 350px;width:200px' %>
+              <h5 class="card-title text-center mt-4" style="text-decoration: none; margin-left: -200px">
+                <%= link_to song.title, song %>
+              </h5>
+            </div>
           </div>
         </div>
-      </div>
       <% end %>
     </div>
   </div>
