@@ -79,8 +79,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_172912) do
     t.bigint "song_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "mus_album_id"
-    t.index ["mus_album_id"], name: "index_taggings_on_mus_album_id"
     t.index ["song_id"], name: "index_taggings_on_song_id"
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
   end
@@ -108,7 +106,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_172912) do
   add_foreign_key "mus_albums", "users"
   add_foreign_key "songs", "mus_albums"
   add_foreign_key "songs", "users"
-  add_foreign_key "taggings", "mus_albums"
   add_foreign_key "taggings", "songs"
   add_foreign_key "taggings", "tags"
 end
