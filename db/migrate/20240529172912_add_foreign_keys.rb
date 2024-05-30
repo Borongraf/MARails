@@ -6,6 +6,5 @@ class AddForeignKeys < ActiveRecord::Migration[7.1]
 
     add_reference :mus_albums, :user, foreign_key: true
     add_reference :songs, :mus_album, foreign_key: true
-    add_reference :taggings, :mus_album, foreign_key: true
   end
 end

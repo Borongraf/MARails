@@ -4,7 +4,7 @@ class MusAlbumsController < ApplicationController
   # GET /mus_albums or /mus_albums.json
   def index
     @q = MusAlbum.ransack(params[:q])
-    @mus_album = @q.result(distinct: true).includes(:tags).where(published: true)
+    @mus_album = @q.result(distinct: true).where(published: true)
   end
 
   # GET /mus_albums/1 or /mus_albums/1.json
@@ -23,7 +23,6 @@ class MusAlbumsController < ApplicationController
   # POST /mus_albums or /mus_albums.json
   def create
     @mus_album = current_user.mus_albums.build(mus_album_params)
-
     @mus_album.published = params[:mus_album][:published] == '1'
 
     respond_to do |format|
@@ -35,12 +34,6 @@ class MusAlbumsController < ApplicationController
         format.json { render json: @mus_album.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def search
-    @q = MusAlbum.ransack(params[:q])
-    @mus_album = @q.result(distinct: true)
-    render :index
   end
 
   def publish
@@ -66,8 +59,6 @@ class MusAlbumsController < ApplicationController
   def destroy
     @mus_album = MusAlbum.find(params[:id])
 
-    @mus_album.taggings.destroy_all
-
     @mus_album.destroy
 
     # Destroy associated rich text content
@@ -86,10 +77,6 @@ class MusAlbumsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def mus_album_params
-    params.require(:mus_album).permit(:title, :description)
-  end
-
-  def set_search
-    @q = MusAlbum.ransack(params[:q])
+    params.require(:mus_album).permit(:title, :description, :all_tags_album)
   end
 end
