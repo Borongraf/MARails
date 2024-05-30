@@ -25,10 +25,10 @@ class Song < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["tags"]
+    ["tags", "user"] # Added "user" to make related search possible
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "description", "id", "title", "updated_at"]
+    ["created_at", "description", "id", "title", "updated_at", "published", "user_id"]
   end
 end
