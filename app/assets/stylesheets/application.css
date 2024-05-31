@@ -14,9 +14,10 @@
  *= require_self
  */
 
+.btn-custom {
+    background-color: #ff9900;
+    color: white;
+    border: none;
+}
 
- 
-
-
-  
   

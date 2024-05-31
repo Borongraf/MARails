@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_172912) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_30_171501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_172912) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -52,14 +66,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_172912) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "mus_albums", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
+  create_table "admin_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "published"
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_mus_albums_on_user_id"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
   create_table "songs", force: :cascade do |t|
@@ -69,8 +90,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_172912) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.boolean "published"
-    t.bigint "mus_album_id"
-    t.index ["mus_album_id"], name: "index_songs_on_mus_album_id"
     t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
@@ -79,8 +98,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_172912) do
     t.bigint "song_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "mus_album_id"
-    t.index ["mus_album_id"], name: "index_taggings_on_mus_album_id"
     t.index ["song_id"], name: "index_taggings_on_song_id"
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
   end
@@ -105,10 +122,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_172912) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "mus_albums", "users"
-  add_foreign_key "songs", "mus_albums"
   add_foreign_key "songs", "users"
-  add_foreign_key "taggings", "mus_albums"
   add_foreign_key "taggings", "songs"
   add_foreign_key "taggings", "tags"
 end
