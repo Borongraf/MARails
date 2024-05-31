@@ -1,7 +1,7 @@
-<div class="edit container-fluid mt-4 d-flex" style="color: orange">
+<div class="edit container-fluid mt-4 d-flex justify-content-center" style="color: orange">
   <%= render "form", song: @song %>
-
-  <br />
 </div>
 
-<div class="mt-4"><%= link_to "Show this song", @song %></div>
+<div class="mt-4 text-center">
+  <%= link_to "Show this song", @song, class: "btn btn-primary", style: "color: black; text-decoration: none;" %>
+</div>

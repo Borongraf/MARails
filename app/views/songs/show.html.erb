@@ -1,39 +1,48 @@
-<div
-  class="container-fluid show d-flex"
-  style="padding-left: 250px; padding-top: 100px"
->
-  <p style="color: red"><%= notice %></p>
-  <div class="d-flex"><%= render @song %></div>
-  <div>
-    <br />
-    <div style="margin-left: 100px; ">
-      <% if @song.profile_image.present? %> <%= image_tag @song.profile_image,
-      width: 250, height: 300, resize_to_fill: [100, 100] %> <% else %>
+<div class="container-fluid show d-flex flex-column align-items-center" style="padding-top: 100px; background-color: #f8f9fa; color: #333; min-height: 100vh;">
+  <p style="color: red;"><%= notice %></p>
 
-      <%= image_tag '', width: 250, height: 300, resize_to_fill: [100, 100] %>
+  <div class="d-flex flex-row align-items-start shadow p-3 mb-5 bg-white rounded">
+    <div class="d-flex flex-column align-items-center">
+      <% if @song.profile_image.present? %>
+        <%= image_tag @song.profile_image, class: "img-thumbnail rounded-circle shadow", style: "width: 250px; height: 250px; object-fit: cover;" %>
+      <% else %>
+        <%= image_tag 'default_image_path', class: "img-thumbnail rounded-circle shadow", style: "width: 250px; height: 250px; object-fit: cover;" %>
       <% end %>
 
-      <br />
-      <br />
-
-    <br/>
-  <%= audio_tag @song.audio, controls: true %>
-    
+      <div class="mt-3">
+        <%= audio_tag @song.audio, controls: true, class: "audio-player" %>
+      </div>
     </div>
-    <br />
-    <div class="mt-3 " style="margin-left:170px">
-      <h2>Your songs</h2>
-      <% current_user.songs.each do |song| %>
-      <p><%= link_to song.title, song_path(song) %></p>
-      <% end %>
-      
+
+    <div class="ml-4 p-3 bg-light shadow-sm rounded" style="max-width: 400px; border: 1px solid #ccc; color: #333;">
+      <%= render @song %>
     </div>
   </div>
-</div>
 
-<div style="margin-left: 250px">
-  <%= link_to "Edit this song", edit_song_path(@song) %>
-  <br />
-  <br />
-  <%= button_to "Destroy this song", @song, method: :delete,class: "btn btn-danger" %>
+  <div class="container mt-5 w-25">
+    <h2 class="text-center mb-4">Your Songs</h2>
+    <div class="list-group">
+      <% current_user.songs.each do |song| %>
+        <div class="list-group-item list-group-item-action bg-white text-dark border-0 shadow-sm mb-2 rounded">
+          <div class="d-flex justify-content-between align-items-center">
+            <span><%= song.title %></span>
+            <%= link_to song_path(song), class: "btn btn-sm btn-success text-white", method: :get do %>
+              View
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-3 d-flex justify-content-center">
+    <%= link_to edit_song_path(@song), class: "btn btn-primary mx-2 shadow text-white", style: "text-decoration: none; background-color: #198754; border-color: #198754;" do %>
+      Edit this song
+    <% end %>
+    <%= button_to @song, method: :delete, class: "btn btn-danger mx-2 shadow text-white", style: "text-decoration: none; background-color: #dc3545; border-color: #000000;" do %>
+      Destroy this song
+    <% end %>
+  </div>
+
+
 </div>

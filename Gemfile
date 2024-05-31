@@ -34,6 +34,12 @@ gem "devise"
 
 gem "acts-as-taggable-on"
 
+#Add active admin
+gem 'activeadmin'
+
+#Add sassc
+gem 'sassc-rails'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
