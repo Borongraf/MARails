@@ -38,6 +38,10 @@ Musify - це веб-додаток для прослуховування муз
 ```
 https://github.com/Borongraf/MARails.git
 ```
+Перейдіть у фінальну версію проекту : 
+```
+git checkout final
+```
 Перейдіть у каталог проекту :
 ```
 cd MARails
