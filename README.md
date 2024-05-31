@@ -1,24 +1,65 @@
-# README
+# Musify
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Musify - це веб-додаток для прослуховування музики. Завдяки ньому можна прослуховувати музику, опубліковувати її на загал або зберігати собі, а також прослуховувати мелодії інших учасників, формуючи свій музичний смак. 
 
-Things you may want to cover:
+---
 
-* Ruby version
+## Посилання
+- [Опис проєкту](#musify)
+- [API Документація](#api-документація)
+- [Діаграми](#діаграми)
+    - [ER Діаграма](#er-діаграма)
+- [Інструкція по встановленню](#інструкція-по-встановленню)
 
-* System dependencies
+---
 
-* Configuration
+## API документація:
 
-* Database creation
+| HTTP-метод                    | Шлях (URL)                                           | Дія                                                               |
+|-------------------------------|------------------------------------------------------|-------------------------------------------------------------------|
+| GET                           | /                                                    | Головна сторінка                                                  |
+| GET, POST, DELETE             | /users/sign_in, /users/sign_out, /users/password/new | Авторизація, реєстрація, скидання пароля користувача та виробника |
+| GET, POST, PUT, DELETE, PATCH | /users, /songs, /taggings, /tags                     | Операції з сутностями                                             |
 
-* Database initialization
+---
 
-* How to run the test suite
+# Діаграми
 
-* Services (job queues, cache servers, search engines, etc.)
+## ER Діаграма:
 
-* Deployment instructions
+![ERD](https://github.com/Borongraf/MARails/blob/main/musify_diagram.png)
 
-* ...
+---
+
+## Інструкція по встановленню:
+
+Склонуйте репозиторій :
+
+```
+https://github.com/Borongraf/MARails.git
+```
+Перейдіть у каталог проекту :
+```
+cd MARails
+```
+Встановіть геми Ruby :
+```
+bundle install
+```
+Створіть базу даних та запустіть міграції :
+```
+rails db:create
+rails db:migrate
+```
+
+```
+Запустіть сервер Rails :
+
+```rails s```
+
+І, нарешті, запускаємо наш додаток в браузері за посиланням :
+
+*http://localhost:3000*
+
+Вітаю, ви зайшли на головну сторінку веб-додатку. 
+
