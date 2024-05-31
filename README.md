@@ -55,8 +55,6 @@ bundle install
 rails db:create
 rails db:migrate
 ```
-
-```
 Запустіть сервер Rails :
 
 ```rails s```
